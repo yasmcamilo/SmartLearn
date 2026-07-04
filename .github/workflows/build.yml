@@ -33,7 +33,7 @@ jobs:
           source.dir = .
           source.include_exts = py,kv,db
           version = 0.1
-          requirements = python3==3.11.6,kivy==2.2.1
+          requirements = python3==3.11.6,hostpython3==3.11.6,kivy==2.2.1
           orientation = portrait
           fullscreen = 0
           android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
