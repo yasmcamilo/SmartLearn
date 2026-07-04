@@ -40,7 +40,7 @@ jobs:
           android.minapi = 21
           android.ndk = 25b
           android.ndk_api = 21
-          android.arch = armeabi-v7a
+          android.archs = armeabi-v7a
           android.allow_backup = True
 
           [buildozer]
