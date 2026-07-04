@@ -1,0 +1,59 @@
+name: Build SmartLearn APK
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install buildozer==1.5.0 cython==0.29.33
+          sudo apt-get install -y \
+            openjdk-17-jdk autoconf libtool pkg-config \
+            zlib1g-dev libncurses5-dev cmake \
+            libffi-dev libssl-dev zip unzip git
+
+      - name: Create buildozer.spec
+        run: |
+          cat > buildozer.spec << 'EOF'
+          [app]
+          title = SmartLearn
+          package.name = smartlearn
+          package.domain = org.systemplus
+          source.dir = .
+          source.include_exts = py,kv,db
+          version = 0.1
+          requirements = python3,kivy==2.2.1
+          orientation = portrait
+          fullscreen = 0
+          android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
+          android.minapi = 21
+          android.ndk = 25b
+          android.ndk_api = 21
+          android.arch = armeabi-v7a
+          android.allow_backup = True
+
+          [buildozer]
+          log_level = 2
+          warn_on_root = 1
+          EOF
+
+      - name: Build APK
+        run: |
+          yes | buildozer android debug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: SmartLearn-APK
+          path: bin/*.apk
