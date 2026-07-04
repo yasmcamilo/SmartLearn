@@ -1,0 +1,660 @@
+#: kivy 2.0
+# SmartLearn — Fix definitivo TextInput (canvas en Label, no en BoxLayout padre)
+
+<GradBtn@Button>:
+    background_color: 0,0,0,0
+    background_normal: ''
+    color: 1,1,1,1
+    bold: True
+    font_size: dp(16)
+    size_hint_y: None
+    height: dp(52)
+    canvas.before:
+        Color:
+            rgba: (0.502, 0.302, 0.878, 1) if self.state=='normal' else (0.38, 0.18, 0.7, 1)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [26]
+
+<PurpleBtn@Button>:
+    background_color: 0,0,0,0
+    background_normal: ''
+    color: 1,1,1,1
+    font_size: dp(13)
+    size_hint_y: None
+    height: dp(36)
+    canvas.before:
+        Color:
+            rgba: (0.502, 0.302, 0.878, 1) if self.state=='normal' else (0.38, 0.18, 0.7, 1)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [18]
+
+<LightBtn@Button>:
+    background_color: 0,0,0,0
+    background_normal: ''
+    color: 0.502, 0.302, 0.878, 1
+    font_size: dp(13)
+    size_hint_y: None
+    height: dp(36)
+    canvas.before:
+        Color:
+            rgba: 0.93, 0.88, 1.0, 1
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [18]
+
+<CardStat@BoxLayout>:
+    orientation: 'vertical'
+    padding: dp(16), dp(12)
+    spacing: dp(2)
+    canvas.before:
+        Color:
+            rgba: 1,1,1,1
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [16]
+
+<NavBarBtn@Button>:
+    background_color: 0,0,0,0
+    background_normal: ''
+    font_size: dp(10)
+    color: 0.6, 0.55, 0.72, 1
+
+# ═══════════════════════════════════════════════════════════════
+# LOGIN
+# ═══════════════════════════════════════════════════════════════
+<LoginScreen>:
+    name: 'login'
+    canvas.before:
+        Color:
+            rgba: 0.655, 0.545, 0.980, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        Color:
+            rgba: 0.80, 0.78, 0.98, 0.50
+        Rectangle:
+            pos: self.x, self.y
+            size: self.width, self.height * 0.42
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(34), dp(0)
+        spacing: 0
+
+        Widget:
+            size_hint_y: None
+            height: dp(48)
+
+        # Logo
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: dp(152)
+            spacing: dp(4)
+
+            Widget:
+                size_hint: None, None
+                size: dp(100), dp(100)
+                pos_hint: {'center_x': 0.5}
+                canvas:
+                    Color:
+                        rgba: 0.788, 0.635, 0.153, 0.22
+                    Ellipse:
+                        pos: self.pos
+                        size: self.size
+                    Color:
+                        rgba: 0.788, 0.635, 0.153, 1
+                    Line:
+                        ellipse: (self.x+1, self.y+1, self.width-2, self.height-2)
+                        width: dp(2.5)
+                Label:
+                    text: '🐴'
+                    font_size: dp(46)
+                    size_hint: None, None
+                    size: dp(100), dp(100)
+                    pos_hint: {'center_x': 0.5}
+
+            Label:
+                text: '[color=C9A227][b]MJV[/b][/color][color=FFFFFF][b] APPIt[/b][/color]'
+                markup: True
+                font_size: dp(28)
+                size_hint_y: None
+                height: dp(36)
+                halign: 'center'
+                text_size: self.size
+
+            Label:
+                text: '[color=FFFFFFAA]— la ayuda a tu mano —[/color]'
+                markup: True
+                font_size: dp(12)
+                size_hint_y: None
+                height: dp(20)
+                halign: 'center'
+                text_size: self.size
+
+        Widget:
+            size_hint_y: None
+            height: dp(18)
+
+        Label:
+            text: '[b]Iniciar Sesión[/b]'
+            markup: True
+            font_size: dp(30)
+            color: 0.12, 0.08, 0.30, 1
+            size_hint_y: None
+            height: dp(44)
+            halign: 'center'
+            text_size: self.size
+
+        Widget:
+            size_hint_y: None
+            height: dp(22)
+
+        # Campo usuario — canvas en Label, TextInput completamente libre
+        BoxLayout:
+            size_hint_y: None
+            height: dp(52)
+            spacing: 0
+            Label:
+                text: '✉'
+                font_size: dp(19)
+                size_hint_x: None
+                width: dp(46)
+                color: 0.502, 0.302, 0.878, 0.85
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 0.92
+                    RoundedRectangle:
+                        pos: self.parent.pos
+                        size: self.parent.size
+                        radius: [26]
+            TextInput:
+                id: txt_usuario
+                hint_text: 'Correo institucional'
+                multiline: False
+                background_normal: ''
+                background_active: ''
+                background_color: 0, 0, 0, 0
+                foreground_color: 0.2, 0.15, 0.4, 1
+                hint_text_color: 0.55, 0.5, 0.68, 1
+                cursor_color: 0.545, 0.361, 0.878, 1
+                font_size: dp(15)
+                padding: dp(4), dp(15)
+
+        Widget:
+            size_hint_y: None
+            height: dp(14)
+
+        # Campo contraseña
+        BoxLayout:
+            size_hint_y: None
+            height: dp(52)
+            spacing: 0
+            Label:
+                text: '🔒'
+                font_size: dp(17)
+                size_hint_x: None
+                width: dp(46)
+                color: 0.502, 0.302, 0.878, 0.85
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 0.92
+                    RoundedRectangle:
+                        pos: self.parent.pos
+                        size: self.parent.size
+                        radius: [26]
+            TextInput:
+                id: txt_password
+                hint_text: 'Contraseña'
+                password: True
+                multiline: False
+                background_normal: ''
+                background_active: ''
+                background_color: 0, 0, 0, 0
+                foreground_color: 0.2, 0.15, 0.4, 1
+                hint_text_color: 0.55, 0.5, 0.68, 1
+                cursor_color: 0.545, 0.361, 0.878, 1
+                font_size: dp(15)
+                padding: dp(4), dp(15)
+
+        Label:
+            id: lbl_error
+            text: ''
+            color: 1, 0.35, 0.35, 1
+            font_size: dp(13)
+            size_hint_y: None
+            height: dp(26)
+            halign: 'center'
+            text_size: self.size
+
+        Widget:
+            size_hint_y: None
+            height: dp(6)
+
+        GradBtn:
+            text: 'Ingresar'
+            on_release: root.do_login()
+
+        Widget:
+            size_hint_y: None
+            height: dp(18)
+
+        Button:
+            text: '¿Olvidaste tu contraseña?'
+            background_color: 0,0,0,0
+            color: 0.35, 0.2, 0.60, 1
+            font_size: dp(14)
+            size_hint_y: None
+            height: dp(34)
+
+        Widget:
+
+# ═══════════════════════════════════════════════════════════════
+# DASHBOARD
+# ═══════════════════════════════════════════════════════════════
+<DashboardScreen>:
+    name: 'dashboard'
+    canvas.before:
+        Color:
+            rgba: 0.945, 0.925, 1.0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: None
+            height: dp(70)
+            padding: dp(16), dp(10)
+            spacing: dp(10)
+            canvas.before:
+                Color:
+                    rgba: 0.655, 0.545, 0.980, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [0, 0, 22, 22]
+            BoxLayout:
+                orientation: 'vertical'
+                spacing: dp(2)
+                Label:
+                    id: lbl_rol_header
+                    text: ''
+                    font_size: dp(12)
+                    color: 1,1,1,0.75
+                    halign: 'left'
+                    text_size: self.size
+                Label:
+                    id: lbl_nombre_header
+                    text: ''
+                    font_size: dp(20)
+                    bold: True
+                    color: 1,1,1,1
+                    halign: 'left'
+                    text_size: self.size
+            Widget:
+            Widget:
+                size_hint: None, None
+                size: dp(42), dp(42)
+                canvas:
+                    Color:
+                        rgba: 1,1,1,0.22
+                    Ellipse:
+                        pos: self.pos
+                        size: self.size
+                Label:
+                    text: '👤'
+                    font_size: dp(20)
+                    size_hint: None, None
+                    size: dp(42), dp(42)
+                    pos: self.parent.pos
+        ScrollView:
+            BoxLayout:
+                id: dash_content
+                orientation: 'vertical'
+                padding: dp(16)
+                spacing: dp(12)
+                size_hint_y: None
+                height: self.minimum_height
+        BoxLayout:
+            size_hint_y: None
+            height: dp(62)
+            canvas.before:
+                Color:
+                    rgba: 1,1,1,1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            NavBarBtn:
+                text: '🏠\nInicio'
+                color: 0.502, 0.302, 0.878, 1
+                on_release: root.go_to('dashboard')
+            NavBarBtn:
+                text: '👥\nUsuarios'
+                on_release: root.go_to('usuarios')
+            NavBarBtn:
+                text: '📚\nCursos'
+                on_release: root.go_to('contenidos')
+            NavBarBtn:
+                text: '📊\nReportes'
+                on_release: root.go_to('resultados')
+            NavBarBtn:
+                text: '⚙\nAjustes'
+                on_release: root.do_logout()
+
+# ═══════════════════════════════════════════════════════════════
+# CONTENIDOS
+# ═══════════════════════════════════════════════════════════════
+<ContenidosScreen>:
+    name: 'contenidos'
+    canvas.before:
+        Color:
+            rgba: 0.945, 0.925, 1.0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: None
+            height: dp(60)
+            padding: dp(14), dp(8)
+            spacing: dp(8)
+            canvas.before:
+                Color:
+                    rgba: 0.655, 0.545, 0.980, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Button:
+                text: '←'
+                size_hint: None, None
+                size: dp(36), dp(36)
+                background_color: 0,0,0,0
+                color: 1,1,1,1
+                font_size: dp(22)
+                on_release: root.go_back()
+            Label:
+                text: 'Cursos'
+                font_size: dp(17)
+                bold: True
+                color: 1,1,1,1
+            Button:
+                id: btn_subir
+                text: '+ Subir'
+                size_hint: None, None
+                size: dp(78), dp(34)
+                background_color: 0,0,0,0
+                color: 1,1,1,0.85
+                font_size: dp(13)
+                on_release: root.abrir_form_subir()
+        BoxLayout:
+            orientation: 'vertical'
+            padding: dp(14)
+            spacing: dp(10)
+            BoxLayout:
+                size_hint_y: None
+                height: dp(44)
+                spacing: dp(8)
+                canvas.before:
+                    Color:
+                        rgba: 1,1,1,1
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [22]
+                padding: dp(14), dp(4)
+                Label:
+                    text: '🔍'
+                    font_size: dp(16)
+                    size_hint_x: None
+                    width: dp(28)
+                Spinner:
+                    id: spin_modulo
+                    text: 'Todos los módulos'
+                    font_size: dp(13)
+                    color: 0.4, 0.35, 0.55, 1
+                    background_color: 0,0,0,0
+                    on_text: root.filtrar(self.text)
+            ScrollView:
+                BoxLayout:
+                    id: lista_contenidos
+                    orientation: 'vertical'
+                    spacing: dp(10)
+                    size_hint_y: None
+                    height: self.minimum_height
+
+# ═══════════════════════════════════════════════════════════════
+# EVALUACIONES
+# ═══════════════════════════════════════════════════════════════
+<EvaluacionesScreen>:
+    name: 'evaluaciones'
+    canvas.before:
+        Color:
+            rgba: 0.945, 0.925, 1.0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: None
+            height: dp(60)
+            padding: dp(14), dp(8)
+            spacing: dp(8)
+            canvas.before:
+                Color:
+                    rgba: 0.655, 0.545, 0.980, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Button:
+                text: '←'
+                size_hint: None, None
+                size: dp(36), dp(36)
+                background_color: 0,0,0,0
+                color: 1,1,1,1
+                font_size: dp(22)
+                on_release: root.go_back()
+            Label:
+                text: 'Cuestionarios'
+                font_size: dp(17)
+                bold: True
+                color: 1,1,1,1
+        ScrollView:
+            BoxLayout:
+                id: lista_evaluaciones
+                orientation: 'vertical'
+                padding: dp(14)
+                spacing: dp(10)
+                size_hint_y: None
+                height: self.minimum_height
+
+# ═══════════════════════════════════════════════════════════════
+# QUIZ
+# ═══════════════════════════════════════════════════════════════
+<QuizScreen>:
+    name: 'quiz'
+    canvas.before:
+        Color:
+            rgba: 0.945, 0.925, 1.0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: None
+            height: dp(60)
+            padding: dp(14), dp(8)
+            spacing: dp(8)
+            canvas.before:
+                Color:
+                    rgba: 0.655, 0.545, 0.980, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Button:
+                text: '←'
+                size_hint: None, None
+                size: dp(36), dp(36)
+                background_color: 0,0,0,0
+                color: 1,1,1,1
+                font_size: dp(22)
+                on_release: root.go_back()
+            Label:
+                id: lbl_titulo_quiz
+                text: 'Quiz'
+                font_size: dp(15)
+                bold: True
+                color: 1,1,1,1
+        ScrollView:
+            BoxLayout:
+                id: quiz_content
+                orientation: 'vertical'
+                padding: dp(14)
+                spacing: dp(14)
+                size_hint_y: None
+                height: self.minimum_height
+
+# ═══════════════════════════════════════════════════════════════
+# RESULTADOS
+# ═══════════════════════════════════════════════════════════════
+<ResultadosScreen>:
+    name: 'resultados'
+    canvas.before:
+        Color:
+            rgba: 0.945, 0.925, 1.0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: None
+            height: dp(60)
+            padding: dp(14), dp(8)
+            spacing: dp(8)
+            canvas.before:
+                Color:
+                    rgba: 0.655, 0.545, 0.980, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Button:
+                text: '←'
+                size_hint: None, None
+                size: dp(36), dp(36)
+                background_color: 0,0,0,0
+                color: 1,1,1,1
+                font_size: dp(22)
+                on_release: root.go_back()
+            Label:
+                text: 'Reportes'
+                font_size: dp(17)
+                bold: True
+                color: 1,1,1,1
+        ScrollView:
+            BoxLayout:
+                id: lista_resultados
+                orientation: 'vertical'
+                padding: dp(14)
+                spacing: dp(10)
+                size_hint_y: None
+                height: self.minimum_height
+
+# ═══════════════════════════════════════════════════════════════
+# AMBIENTE
+# ═══════════════════════════════════════════════════════════════
+<AmbienteScreen>:
+    name: 'ambiente'
+    canvas.before:
+        Color:
+            rgba: 0.945, 0.925, 1.0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: None
+            height: dp(60)
+            padding: dp(14), dp(8)
+            canvas.before:
+                Color:
+                    rgba: 0.655, 0.545, 0.980, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Button:
+                text: '←'
+                size_hint: None, None
+                size: dp(36), dp(36)
+                background_color: 0,0,0,0
+                color: 1,1,1,1
+                font_size: dp(22)
+                on_release: root.go_back()
+            Label:
+                text: 'Aula Inteligente'
+                font_size: dp(17)
+                bold: True
+                color: 1,1,1,1
+        ScrollView:
+            BoxLayout:
+                id: ambiente_content
+                orientation: 'vertical'
+                padding: dp(14)
+                spacing: dp(10)
+                size_hint_y: None
+                height: self.minimum_height
+
+# ═══════════════════════════════════════════════════════════════
+# USUARIOS
+# ═══════════════════════════════════════════════════════════════
+<UsuariosScreen>:
+    name: 'usuarios'
+    canvas.before:
+        Color:
+            rgba: 0.945, 0.925, 1.0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: None
+            height: dp(60)
+            padding: dp(14), dp(8)
+            canvas.before:
+                Color:
+                    rgba: 0.655, 0.545, 0.980, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Button:
+                text: '←'
+                size_hint: None, None
+                size: dp(36), dp(36)
+                background_color: 0,0,0,0
+                color: 1,1,1,1
+                font_size: dp(22)
+                on_release: root.go_back()
+            Label:
+                text: 'Gestión de Usuarios'
+                font_size: dp(16)
+                bold: True
+                color: 1,1,1,1
+        ScrollView:
+            BoxLayout:
+                id: lista_usuarios
+                orientation: 'vertical'
+                padding: dp(14)
+                spacing: dp(8)
+                size_hint_y: None
+                height: self.minimum_height
