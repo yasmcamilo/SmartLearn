@@ -17,7 +17,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install buildozer==1.5.0 cython==0.29.33
+          pip install buildozer==1.5.0 cython==0.29.33 python-for-android==2024.1.21
           sudo apt-get install -y \
             openjdk-17-jdk autoconf libtool pkg-config \
             zlib1g-dev libncurses-dev cmake \
@@ -33,7 +33,7 @@ jobs:
           source.dir = .
           source.include_exts = py,kv,db
           version = 0.1
-          requirements = python3,kivy==2.2.1
+          requirements = python3==3.11.6,kivy==2.2.1
           orientation = portrait
           fullscreen = 0
           android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
