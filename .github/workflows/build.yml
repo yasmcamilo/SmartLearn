@@ -20,7 +20,7 @@ jobs:
           pip install buildozer==1.5.0 cython==0.29.33
           sudo apt-get install -y \
             openjdk-17-jdk autoconf libtool pkg-config \
-            zlib1g-dev libncurses5-dev cmake \
+            zlib1g-dev libncurses-dev cmake \
             libffi-dev libssl-dev zip unzip git
 
       - name: Create buildozer.spec
